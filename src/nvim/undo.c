@@ -1452,12 +1452,15 @@ void u_read_undo(char *name, const uint8_t *hash, const char *orig_name FUNC_ATT
       if (name == NULL) {
         verbose_enter();
       }
-      give_warning(_("File contents changed, cannot use undo info"), true);
+
+      char mymsg[60];
+      sprintf(mymsg, "File contents changed, cannot use undo info: %i", line_count);
+
+      give_warning(_(mymsg), true);
       if (name == NULL) {
         verbose_leave();
       }
     }
-    goto error;
   }
 
   // Read undo data for "U" command.
